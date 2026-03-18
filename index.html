@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Oops 😅</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    /* Background */
+    #bgCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: black;
+    }
+
+    .container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      color: #cbd5f5;
+    }
+
+    /* IMAGE */
+    .team-img {
+      width: 460px;
+      max-width: 80%;
+      margin: 20px 0;
+      filter: drop-shadow(0 0 20px rgba(0,255,157,0.5));
+      transition: 0.3s;
+    }
+
+    .team-img:hover {
+      transform: scale(1.05);
+    }
+
+    /* NAMES (stylish, not boxy) */
+    .names {
+      display: flex;
+      gap: 25px;
+      margin-top: 10px;
+    }
+
+    .names a {
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: bold;
+      position: relative;
+      transition: 0.3s;
+    }
+
+    .names a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0%;
+      height: 2px;
+      background: #00ff9d;
+      transition: 0.3s;
+    }
+
+    .names a:hover {
+      color: #00cc7a;
+    }
+
+    .names a:hover::after {
+      width: 100%;
+    }
+
+    .footer {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      padding: 10px;
+      max-width: 700px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="bgCanvas"></canvas>
+
+  <div class="container">
+    <h2>OOPS 😅 you just missed your Free Bitcoin</h2>
+    <H1>Anyways… do care to check out our profiles</H1>
+
+    <!-- 🔥 ADD YOUR PNG HERE -->
+    <img src="LS20260307230910.png" alt="Our Team" class="team-img">
+
+    <!-- Names in requested order -->
+    <div class="names">
+       
+      <a href="https://www.linkedin.com/in/venkata-ramana-126422327/" target="_blank">Venkata Ramana</a>
+      <a href="https://www.linkedin.com/in/pandeykartik/" target="_blank">Kartik Pandey</a>
+      <a href="https://www.linkedin.com/in/banda-vamshi-teja-3747a9364/" target="_blank">Vamshi</a>
+    </div>
+  </div>
+
+  <div class="footer">
+    ⚠️ This webpage is created solely for entertainment and parody purposes. 
+    It does not offer or distribute any cryptocurrency.
+    © Kartik Pandey 2026
+  </div>
+
+  <script>
+    const canvas = document.getElementById("bgCanvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const chars = "01+-*/=<>πΣ√∆";
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#00ff9d";
+      ctx.font = fontSize + "px monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 33);
+
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+
+</body>
+</html>
